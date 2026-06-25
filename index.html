@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Công Chúa Của Anh 💖✨</title>
+    <!-- Google Fonts: Quicksand for cute rounded text, Sacramento for elegant handwriting -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Thẻ audio ẩn chứa nhạc MP3 (Thêm ở đây để script.js dễ dàng điều khiển) -->
+    <audio id="bg-music" src="https://www.youtube.com/watch?v=uw8N-VP5r7g&list=RDuw8N-VP5r7g&start_radio=1" loop></audio>
+
+    <!-- Canvas background for sparkles and bubbles -->
+    <canvas id="sparkle-canvas"></canvas>
+
+    <!-- Background decorative floating xúojis (will be animated via CSS/JS) -->
+    <div class="floating-xúojis-bg" id="floating-xúojis-bg"></div>
+
+    <!-- Background music player (Lofi cassette widget) -->
+    <div class="music-player-widget" id="music-player">
+        <div class="cassette-body">
+            <div class="cassette-label">LOFI LOVE 📼</div>
+            <div class="cassette-wheels">
+                <div class="wheel" id="wheel-left"></div>
+                <div class="wheel" id="wheel-right"></div>
+            </div>
+        </div>
+        <button class="music-control-btn" id="music-btn" aria-label="Bật/Tắt nhạc">
+            <i class="fas fa-play" id="music-icon"></i>
+        </button>
+        <span class="music-tooltip">Bật nhạc ngọt ngào nè! ✨</span>
+    </div>
+
+    <!-- SECTION 1: ENVELOPE (GREETING) -->
+    <div class="page-container active" id="greeting-screen">
+        <div class="greeting-box">
+            <div class="floating-title">Có một món quà nhỏ dành cho xú... 🌸</div>
+            
+            <div class="envelope-wrapper" id="envelope-wrapper">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-paper">
+                        <div class="paper-title">xú ơi! 💖</div>
+                        <p class="paper-text">Hôm nay a chán quá a nghịch:)). Hãy click để mở ra nhé!</p>
+                    </div>
+                </div>
+                <div class="wax-seal" id="wax-seal">
+                    <div class="seal-heart">💖</div>
+                </div>
+            </div>
+            
+            <div class="hint-text">Bấm vào con dấu sáp trái tim để mở thư 💌</div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: MAIN DASHBOARD -->
+    <div class="page-container" id="main-dashboard">
+        <div class="dashboard-content">
+            
+            <!-- Floating Polaroid Gallery (absolute positioned elxúents) -->
+            <div class="polaroid-gallery" id="polaroid-gallery">
+                <!-- Polaroid 1 -->
+                <div class="polaroid-card" id="polaroid-1" style="--rotation: -8deg; --init-top: 15%; --init-left: 10%;">
+                    <div class="polaroid-img-wrapper">
+                        <img src="images/girlfriend1.jpg" alt="xú đáng yêu quá nè">
+                    </div>
+                    <div class="polaroid-caption">Má bánh bao cưng xỉu 🧸</div>
+                </div>
+                
+                <!-- Polaroid 2 -->
+                <div class="polaroid-card" id="polaroid-2" style="--rotation: 6deg; --init-top: 55%; --init-left: 75%;">
+                    <div class="polaroid-img-wrapper">
+                        <img src="images/girlfriend2.jpg" alt="Môi hồng xinh xắn">
+                    </div>
+                    <div class="polaroid-caption">Đáng yêu số 1 lun! 🌸</div>
+                </div>
+                
+                <!-- Polaroid 3 -->
+                <div class="polaroid-card" id="polaroid-3" style="--rotation: -5deg; --init-top: 60%; --init-left: 15%;">
+                    <div class="polaroid-img-wrapper">
+                        <img src="images/girlfriend3.jpg" alt="Nụ cười lấp lánh">
+                    </div>
+                    <div class="polaroid-caption">Nhìn xú là thấy ngọt ngào 💕</div>
+                </div>
+            </div>
+
+            <!-- Main Interactive Card (Center) -->
+            <main class="main-card-container">
+                <div class="main-card">
+                    <div class="avatar-header">
+                        <div class="avatar-ring"></div>
+                        <img src="images/girlfriend1.jpg" alt="My Princess" class="avatar-img">
+                        <span class="online-sparkle">✨</span>
+                    </div>
+
+                    <h1 class="love-title">Chào xú iu của anh! 👑</h1>
+                    
+                    <!-- Love Letter (Typewriter) -->
+                    <div class="love-letter-container">
+                        <div class="love-letter-text" id="typewriter-text"></div>
+                    </div>
+
+                    <!-- Heart Clicker Counter -->
+                    <div class="heart-clicker-section">
+                        <div class="heart-counter">
+                            Trái tim đã gửi: <span id="heart-count">0</span> 💕
+                        </div>
+                        <button class="love-heart-btn" id="love-button" aria-label="Gửi yêu thương">
+                            <span class="heart-icon">💖</span>
+                            <span class="btn-shine"></span>
+                        </button>
+                        <p class="clicker-hint">Bấm vào trái tim để gửi ngàn tình yêu cho xú!</p>
+                    </div>
+
+                    <!-- Interactive Mxúories Carousel -->
+                    <div class="carousel-container">
+                        <div class="carousel-header">
+                            <h3>Những điều anh yêu ở xú 🌻</h3>
+                        </div>
+                        <div class="carousel-track-wrapper">
+                            <div class="carousel-slide active" id="slide-1">
+                                <div class="slide-icon">🧸</div>
+                                <h4>xú luôn siêu cấp đáng yêu</h4>
+                                <p>Mỗi khi xú dỗi, hay lúc xú làm má bánh bao phồng lên, anh chỉ muốn ôm xú thật chặt thôi!</p>
+                            </div>
+                            <div class="carousel-slide" id="slide-2">
+                                <div class="slide-icon">💫</div>
+                                <h4>Nụ cười làm sáng bừng thế giới</h4>
+                                <p>Chỉ cần nhìn thấy nụ cười của xú, mọi mệt mỏi trong ngày của anh đều tan biến sạch sẽ.</p>
+                            </div>
+                            <div class="carousel-slide" id="slide-3">
+                                <div class="slide-icon">💌</div>
+                                <h4>Sự quan tâm ngọt ngào của xú</h4>
+                                <p>Cách xú nhắn tin nhắc anh ăn uống, hỏi han anh làm anh luôn cảm thấy mình là người may mắn nhất.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev-btn" id="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                            <span class="carousel-dots">
+                                <span class="dot active" data-slide="1"></span>
+                                <span class="dot" data-slide="2"></span>
+                                <span class="dot" data-slide="3"></span>
+                            </span>
+                            <button class="carousel-btn next-btn" id="next-slide"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Interactive quiz card -->
+                    <div class="quiz-container">
+                        <h3>Hôm nay xú thế nào? 🍓</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-opt-btn" data-reaction="happy">Rất là vui vẻ! 🥰</button>
+                            <button class="quiz-opt-btn" data-reaction="tired">Hơi mệt một xíu... 🥺</button>
+                            <button class="quiz-opt-btn" data-reaction="miss">Nhớ anh da diết! 😘</button>
+                        </div>
+                        <div class="quiz-response" id="quiz-reply"></div>
+                    </div>
+
+                    <footer class="footer-note">
+                        Made with 💖 by Your Boyfriend
+                    </footer>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Lightbox Modal for Photo viewing -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Hình ảnh phóng to">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- Javascript file -->
+    <script src="script.js"></script>
+</body>
+</html>
